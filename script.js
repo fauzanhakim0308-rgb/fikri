@@ -81,21 +81,24 @@ document.addEventListener("DOMContentLoaded", () => {
       "Laravel Enthusiast",
     ];
     let roleIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let typingSpeed = 100;
+    let charIndex = roles[0].length;
+    let isDeleting = true;
+    let typingSpeed = 2000;
+
+    // Tampilkan teks peran pertama secara utuh saat awal
+    heroTitleElement.textContent = roles[0];
 
     function typeEffect() {
       let currentRole = roles[roleIndex];
 
       if (isDeleting) {
-        heroTitleElement.textContent = currentRole.substring(0, charIndex - 1);
         charIndex--;
-        typingSpeed = 50;
+        heroTitleElement.textContent = currentRole.substring(0, charIndex);
+        typingSpeed = 40;
       } else {
-        heroTitleElement.textContent = currentRole.substring(0, charIndex + 1);
         charIndex++;
-        typingSpeed = 100;
+        heroTitleElement.textContent = currentRole.substring(0, charIndex);
+        typingSpeed = 90;
       }
 
       if (!isDeleting && charIndex === currentRole.length) {
@@ -104,12 +107,12 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (isDeleting && charIndex === 0) {
         isDeleting = false;
         roleIndex = (roleIndex + 1) % roles.length;
-        typingSpeed = 500;
+        typingSpeed = 400;
       }
 
       setTimeout(typeEffect, typingSpeed);
     }
 
-    setTimeout(typeEffect, 1000);
+    setTimeout(typeEffect, 2000);
   }
 });
